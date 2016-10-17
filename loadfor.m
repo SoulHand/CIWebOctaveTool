@@ -14,8 +14,9 @@ xmax=max(temp(:));
 PATH_DIR=strcat('./images/',input('Ingrese el nombre de la carpeta:','s'),'/');
 files=dir(strcat(PATH_DIR,'*.*'));
 n=length(files);
-fprintf('Se procesaran %d imagenes en diferentes escalas.\nPresione enter para continuar....\n',n);
+fprintf('Se procesaran %d imagenes en diferentes escalas.\nPresione enter para continuar....',n);
 pause;
+clc;
 for i=1:n
 	urlpath=files(i).name;
 	imD = imread(strcat(PATH_DIR,urlpath));

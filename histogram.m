@@ -2,21 +2,17 @@ function hist=histogram(imD)
     %im = imread(imagen);   
     %imD = double(imagen);
     [f,c,rgb]=size(imD);
-    h=zeros(256,1);
+    display([f,c,rgb]);
+    hist=zeros(256,1);
     for i=1:f
            for j=1:c 
-            gr=0;         
-              for g=1:rgb
-                gr +=imD(i,j,g);                
-               end
-               k=round(gr/rgb);
-               h(k+1)++;
+            gr=round(sum(imD(i,j,:))/rgb);
+            hist(gr+1)++;
            end
     end
-    xmax=max(h);
+    xmax=max(hist);
+    display(hist);
     if(xmax>0)
-      hist = h./xmax;
-    else
-      hist=h;
+      hist = hist./xmax;    
     end
 end

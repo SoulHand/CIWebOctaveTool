@@ -1,6 +1,7 @@
 	T=5e-1;
 	[FileName Path]=uigetfile({'*.jpg;*.jpeg;*.gif;*.png'}, 'Seleccione las imagenes a procesar');
 	if !isequal(FileName,0)		
+		[mi S]=size(W);
 		urlPath=strcat(Path,FileName);
 		imD = imread(urlPath);
 		i=0;
@@ -22,7 +23,8 @@
 				 		Hn=histogram(C);
 				 		A1=[1 Hn'];
 				 		H=sigmoid(A1*W);
-				 		if(max(H)>=T)
+				 		uv=max(H);
+				 		if((uv>=T && S>1) || (uv<T && S<=1))
 					 		submenu=0;
 					 		imshow(C);
 					 		[u v]=size(H);
@@ -30,9 +32,10 @@
 	   							fprintf('Probabilidad para (%d,%d): %f \n',x,y,H(i));
 	   						end
 	   						while(submenu==0)
-	   							fprintf('\n1.-Añadir como falso positivo\n2.-Añadir como ventana positiva\n3.-Saltar\n');   						
+	   							fprintf('\n1.-Añadir como falso positivo\n2.-Añadir como ventana positiva\n3.-Saltar\n4.-Matar proceso\n');   						
 								submenu=input('Ingrese una opción:');
-								if(submenu==1)
+								switch submenu
+									case 1
 									[mi S]=size(W);
 									[file,limite]=size(X);
 									if(S>1)
@@ -43,9 +46,7 @@
 									file++;
 									X(file,:)=A1;
 									Y(file,:)=temp(:);						
-								else
-									if(submenu==2)
-										[mi S]=size(W);
+									case 2
 										[file,limite]=size(X);
 										temp=zeros(S,1);
 										for i=1:S
@@ -57,8 +58,10 @@
 										file++;								
 										X(file,:)=[ 1 Hn'];
 										Y(file,:)=temp(:);
-									end
-								end
+									case 4
+										save './MathWork/backup.m' X Y W CANONICALW CANONICALH sK windW windH T ALPHA Theta1 Theta2 Theta3 lambda;
+										exit;
+								end								
 							end
 						end
 				 		x+=STEP;

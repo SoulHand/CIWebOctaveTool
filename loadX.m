@@ -17,8 +17,8 @@ while fin==false
 		end
 		clc;
 		fprintf('Procesando espere....\n');
-		pause(1.5);
 		xmax=max(temp(:));
+		display(S);
 		if((S>1 && xmax==1) || (S==1 && xmax==0))
 			B=imresize(new_image,[CANONICALH,CANONICALW]);
 			Hn=histogram(B);
@@ -68,8 +68,6 @@ while fin==false
 	file++;
 end
 fprintf('Reescalado y deslizamiento completado...\n');
-%save -ascii '../training/X.txt' X;
-%save -ascii '../training/Y.txt' Y;
 [m n]=size(X);
 fprintf('Los archivos han sido añadidos satisfactoriamente... \nTotal entrenamiento : %d imagenes \n',m);
 pause;

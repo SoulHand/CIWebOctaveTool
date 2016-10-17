@@ -1,4 +1,4 @@
-function [Theta]=gradientDescent(Theta,X,Y,iters,ALPHA,lambda)	
+function [Theta]=gradientDescent(Theta,X,Y,iters,ALPHA,lambda)
 	for i=1:iters
 		m=length(Y);
 		temp=Theta(:,:);
