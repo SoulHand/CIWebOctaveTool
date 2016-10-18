@@ -1,7 +1,8 @@
 function [H new_img]=LBP(imD,t)
 	H=zeros(256,1);
 	[f,c,rgb]=size(imD);
-	new_img=zeros(size(imD));
+	%[f,c,rgb]=size(imD);
+	new_img=imD;
 	for i=1:f
            for j=1:c
            	 	gr=round(sum(imD(i,j,:))/rgb);
@@ -47,7 +48,7 @@ function [H new_img]=LBP(imD,t)
 	               		if(round(sum(imD(i-1,j,:))/rgb)-gr>=t)	               		
 	               			byte(7)=64;               			
 	               		end
-	               	end	               
+	               	end
 	               	p=sum(byte(:));	               	             	
                		new_img(i,j,1)=p;
                		new_img(i,j,2)=p;

@@ -11,7 +11,7 @@ function hist=histogram(imD)
            end
     end
     xmax=max(hist);
-    display(hist);
+    display(xmax);
     if(xmax>0)
       hist = hist./xmax;    
     end
