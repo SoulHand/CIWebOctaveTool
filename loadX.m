@@ -2,8 +2,8 @@ load ('histogram.m');
 load ('LBP.m');
 [mi S]=size(W);
 fin=false;
-[file,limite]=size(X);
-file++;
+[val,limite]=size(X);
+file=val+1;
 while fin==false
 	[FileName Path]=uigetfile({'*.jpg;*.jpeg;*.gif;*.png'}, 'Seleccione las imagenes a procesar');
 	if !isequal(FileName,0)
@@ -18,7 +18,6 @@ while fin==false
 		clc;
 		fprintf('Procesando espere....\n');
 		xmax=max(temp(:));
-		display(S);
 		if((S>1 && xmax==1) || (S==1 && xmax==0))
 			B=imresize(new_image,[CANONICALH,CANONICALW]);
 			Hn=histogram(B);
@@ -52,15 +51,17 @@ while fin==false
 						x+=STEP;
 						xend=x+(CANONICALW-1);						
 					end					
+					x=1;
+					xend=x+(CANONICALW-1);
 					y+=STEP;
-					yend=y+CANONICALH-1;
+					yend=y+(CANONICALH-1);
 				end
 				i++;
 				newW=w/sK^i;
 				newH=h/sK^i;
 			end
 		end		
-	end	
+	end
 	opc=questdlg('¿Desea Agregar otra imagen?','SALIR','Si','No','No');
 	if  strcmp(opc,'No')
 		fin=true;
@@ -68,6 +69,5 @@ while fin==false
 	file++;
 end
 fprintf('Reescalado y deslizamiento completado...\n');
-[m n]=size(X);
-fprintf('Los archivos han sido añadidos satisfactoriamente... \nTotal entrenamiento : %d imagenes \n',m);
+fprintf('Los archivos han sido añadidos satisfactoriamente... \nTotal entrenamiento : %d imagenes \n',(file-val));
 pause;

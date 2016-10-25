@@ -2,8 +2,8 @@ load ('histogram.m');
 load ('LBP.m');
 [mi S]=size(W);
 fin=false;
-[file,limite]=size(X);
-file++;
+[val,limite]=size(X);
+file=val+1;
 temp=zeros(S,1);
 		for i=1:S
 			temp(i)=double(input(strcat('Ingrese el valor salida de (',int2str(i),')  deseado [0...1]:')));
@@ -54,8 +54,10 @@ for i=1:n
 						x+=STEP;
 						xend=x+(CANONICALW-1);						
 					end					
+					x=1;
+					xend=x+(CANONICALW-1);
 					y+=STEP;
-					yend=y+CANONICALH-1;
+					yend=y+(CANONICALH-1);
 				end
 				i++;
 				newW=w/sK^i;
@@ -64,4 +66,4 @@ for i=1:n
 		end
 		file++;										
 end
-fprintf('%d imagenes fueron procesadas correctamente...\n',n);
+fprintf('%d imagenes fueron procesadas correctamente...\n',(file-val));

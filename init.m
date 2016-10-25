@@ -59,7 +59,7 @@ while menu~=18,
 			if !isequal(FileName,0)
 				urlPath=strcat(Path,FileName);
 				load(urlPath);
-				fprintf('Importación completada con %d Registros...\n',length(X));																	
+				fprintf('Importación completada con %d Registros...\n',length(X));
 			else
 				fprintf('Seleccione un archivo valido....\n');
 			end
@@ -72,6 +72,10 @@ while menu~=18,
 		case 10
 			CANONICALW=input('Ingrese ancho de la imagen canonical(W):');
 			CANONICALH=input('Ingrese alto de la imagen canonical (H):');
+			fprintf('Cambios realizados exitosamente...\nVentana compleya');
+
+			windW=input('Ingrese ancho de la imagen(W):');
+			windH=input('Ingrese alto de la imagen (H):');
 			fprintf('Cambios realizados exitosamente...');
 		case 11
 			sK=double(input('Ingrese salto de redimencion:'));

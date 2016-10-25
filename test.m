@@ -23,7 +23,7 @@
 				 		Hn=histogram(C);
 				 		A1=[1 Hn'];
 				 		H=sigmoid(A1*W);
-				 		uv=max(H);
+				 		uv=max(H);				 		
 				 		if((uv>=T && S>1) || (uv<T && S<=1))
 					 		submenu=0;
 					 		imshow(C);
@@ -66,9 +66,11 @@
 						end
 				 		x+=STEP;
 						xend=x+(CANONICALW-1);
-					end					
+					end
+					x=1;
+					xend=x+(CANONICALW-1);
 					y+=STEP;
-					yend=y+CANONICALH-1;
+					yend=y+(CANONICALH-1);					
 				end
 				i++;
 				newW=w/sK^i;
