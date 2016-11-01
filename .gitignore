@@ -1,0 +1,7 @@
+*.[oa]
+*~
+MathWork/
+images/
+octave-workspace
+training/
+weights/
