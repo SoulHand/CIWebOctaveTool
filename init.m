@@ -28,8 +28,8 @@ lambda=0;
 clc;
 fprintf('Inicializando los pesos ...\n');
 menu=0;
-while menu~=18,
-	fprintf('Entrenamiento LBP Cascade\n1.-Añadir una imagen LBP\n2.-Calcular Funcion de Costo\n3.- Entrenar clasificador\n4.-Probar con una imagen\n5.-Reiniciar Pesos\n6.-Eliminar Entrenamiento\n7.- Importar datos\n8.-Guardar Cambios\n9.-Exportar Pesos\n10.-Cambiar tamano de la imagen canonical\n11.-Cambiar salto de redimencion\n12.-Cambiar valor de ALPHA\n13.-Añadir una estructura de imagenes\n14.-Exportar entrenamiento\n15.-Crear set neuronal\n16.-Calcular función de costo red neuronal\n17.-Entrenar red neuronal\n18.-Salir\n');
+while menu~=19,
+	fprintf('Entrenamiento LBP Cascade\n1.-Añadir una imagen LBP\n2.-Calcular Funcion de Costo\n3.- Entrenar clasificador\n4.-Probar con una imagen\n5.-Reiniciar Pesos\n6.-Eliminar Entrenamiento\n7.- Importar datos\n8.-Guardar Cambios\n9.-Exportar Pesos\n10.-Cambiar tamano de la imagen canonical\n11.-Cambiar salto de redimencion\n12.-Cambiar valor de ALPHA\n13.-Añadir una estructura de imagenes\n14.-Exportar entrenamiento\n15.-Crear set neuronal\n16.-Calcular función de costo red neuronal\n17.-Entrenar red neuronal\n18.-Añadir set de entrenamientos\n19.-Salir\n');
 	menu=input('Ingrese una opción:');
 	switch menu
 		case 1
@@ -102,7 +102,20 @@ while menu~=18,
 			iters=input('Ingrese epocas a entrenar:');
 			[Theta1 Theta2 Theta3]=gradientDescentBrain(X,Y,iters,ALPHA,Theta1,Theta2,Theta3);			
 			J=computeCostBrain(X,Y,Theta1,Theta2,Theta3);
-			fprintf('Error aproximado: %f \n',J);
-	end	
+			fprintf('Error aproximado: %f \n',J);		
+		case 18
+			[FileName Path]=uigetfile({'*.txt;*.m'}, 'Seleccione data a importar');
+			if !isequal(FileName,0)
+				urlPath=strcat(Path,FileName);
+				data=load(urlPath);
+				n=length(X);
+				X=cat(1,X,data.X);
+				Y=cat(1,Y,data.Y);
+				n=length(X)-n;
+				fprintf('Importación completada con %d Registros...\n',n);
+			else
+				fprintf('Seleccione un archivo valido....\n');
+			end
+		end
 	clc;
 end
